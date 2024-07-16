@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Inter, 'sans-serif';
+    font-size: 20px;
+    font-weight: normal;
+    color: hsl(0, 0%, 24%);
+}
+
+body {
+    padding: 24px 40px;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: hsl(0, 0%, 16%);
+}
+
+strong {
+    font-weight: 600;
+}
+
+.title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.label {
+    margin: 0;
+    padding: 0;
+    color: hsl(0, 0%, 48%);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+
+.searchbox {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 2px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+
+.searchbox__label {
+    display: block;
+    margin: 32px 0 8px;
+}
+
+.searchbox__input {
+    width: 100%;
+    padding: 8px 40px 8px 12px;
+    font-size: inherit;
+    color: hsl(0, 0%, 24%);
+    border: 0;
+}
+
+.searchbox__icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    color: hsl(0, 0%, 64%);
+    transform: translateY(-50%);
+}
+
+.contactlist {
+    padding: 0;
+    margin-top: 16px;
+    width: 100%;
+    font-size: 16px;
+    list-style-type: none;
+    list-style-position: outside;
+}
+
+.contactlist__item {
+    padding: 16px 0;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.contact__name {
+    margin: 4px 0 0;
+}
+
+.contact__job {
+    margin: 4px 0 0;
+}
+
+.contact__email {
+    margin: 4px 0 0;
+}

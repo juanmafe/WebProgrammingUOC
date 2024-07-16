@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20232 Web Programming - CAA2 Quesiton 4</title>
+    <script type="module" src="./js/toggle.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <h1>Toggles!</h1>
+
+    <p class="label">Option A</p>
+    <div class="toggle js-toggle" data-status="false">
+        <p class="toggle__status js-toggle-status">OFF</p>
+    </div>
+
+    <p class="label">Option B</p>
+    <div class="toggle js-toggle" data-status="true">
+        <p class="toggle__status toggle__status--on js-toggle-status">ON</p>
+    </div>
+
+    <script type="module">
+        import Toggle from './js/toggle.js';
+
+        // We collect all the .js-toggle divs and create an object with each of them,
+        // so that the onclick() functions and the change of states work in a scalable way.
+        const toggleList = document.querySelectorAll(".js-toggle");
+        toggleList.forEach(toggle => new Toggle(toggle));
+    </script>
+</body>
+
+</html>
