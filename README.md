@@ -6,7 +6,7 @@ Practices for the Web Programming course.
 - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA1">CAA 1</a>
 - CAA 2
   - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA2/question1">Question 1</a>
-  - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA2">Question 2</a>
-  - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA2">Question 3</a>
+  - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA2/question2">Question 2</a>
+  - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA2/question3">Question 3</a>
 
 
