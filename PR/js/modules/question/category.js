@@ -6,7 +6,7 @@ const API_URL = 'https://opentdb.com/api_category.php';
 const ERROR_FETCHING_CATEGORIES = 'Error fetching categories:';
 const ERROR_FETCHING_CATEGORY_IDS = 'Error fetching category IDs';
 
-export class Category {
+export default class Category {
 
     #categoryIds;
 

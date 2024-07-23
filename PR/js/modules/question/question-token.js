@@ -1,7 +1,7 @@
 const API_URL = 'https://opentdb.com/api_token.php';
 const ERROR_FETCHING_TOKEN = 'Error fetching token from opentdb.com:';
 
-export class QuestionToken {
+export default class QuestionToken {
 
     #sessionToken;
 

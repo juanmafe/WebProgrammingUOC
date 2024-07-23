@@ -78,7 +78,7 @@ export default class Score {
             this.#ranking.set(newRanking);
             this.#ranking.render(newRanking);
         }
-        // Cleaning the name for next tries.
+        // Cleaning name for next tries.
         playerNameInput.value = '';
     }
 }

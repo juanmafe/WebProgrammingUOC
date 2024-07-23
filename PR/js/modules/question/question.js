@@ -4,7 +4,7 @@ import Encoder from '../utils/encoder.js';
 const API_URL = 'https://opentdb.com/api.php';
 const ERROR_FETCHING_QUESTION = 'Error fetching question from opentdb.com:';
 
-export class Question {
+export default class Question {
 
     #category;
     #sessionToken;
@@ -91,12 +91,25 @@ export class Question {
 
         const questionElement = document.querySelector('.js-question');
 
-        questionElement.innerHTML = `
-            <p class="question__statement">${question}</p>
-            <ul class="question__answers">
-                ${answers.map(answer => `<li class="question__option" data-value="${answer}">${answer}</li>`).join('')}
-            </ul>
-        `;
+        // Clening previous question.
+        questionElement.innerHTML = '';
+
+        const questionStatement = document.createElement('p');
+        questionStatement.className = 'question__statement';
+        questionStatement.textContent = question;
+        questionElement.appendChild(questionStatement);
+
+        const answersList = document.createElement('ul');
+        answersList.className = 'question__answers';
+
+        answers.forEach(answer => {
+            const answerItem = document.createElement('li');
+            answerItem.className = 'question__option';
+            answerItem.dataset.value = answer;
+            answerItem.textContent = answer;
+            answersList.appendChild(answerItem);
+        });
+        questionElement.appendChild(answersList);
     }
 
     /**

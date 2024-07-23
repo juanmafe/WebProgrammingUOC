@@ -1,33 +1,28 @@
-import { Category } from './question/category.js';
 import Score from './score/score.js';
-import { Question } from './question/question.js';
-import { QuestionToken } from './question/question-token.js';
+import GameState from './game-state.js';
+import Category from './question/category.js';
+import Question from './question/question.js';
+import QuestionToken from './question/question-token.js';
 
 export default class Game {
 
-    #startButton;
-    #cancelButton;
-    #discardButton;
-
-    #questionSection;
-    #pointsSection;
-    #scoreSection;
-
-    #numberQuestion;
-    #questionOptions;
-    #token
+    #gameState;
 
     #score;
     #category;
     #categories;
 
+    #questionOptions;
+    #questionToken;
+
     /**
      * Constructor.
      */
     constructor() {
+        this.#gameState = new GameState();
         this.#score = new Score();
         this.#category = new Category();
-        this.#token = new QuestionToken();
+        this.#questionToken = new QuestionToken();
         this.#init();
     }
 
@@ -35,18 +30,8 @@ export default class Game {
      * Init.
      */
     #init() {
-        this.#startButton = document.querySelector('.js-new');
-        this.#cancelButton = document.querySelector('.js-cancel');
-        this.#discardButton = document.querySelector('.js-discard');
-        this.#questionSection = document.querySelector('.js-question');
-        this.#pointsSection = document.querySelector('.points');
-        this.#scoreSection = document.querySelector('.js-score');
-
-        this.#startButton.addEventListener('click', this.#newGame.bind(this));
-        this.#cancelButton.addEventListener('click', this.#clearGame.bind(this));
-        this.#discardButton.addEventListener('click', this.#clearGame.bind(this));
-
-        this.#clearGame();
+        this.#gameState.getStartButton().addEventListener('click', this.#newGame.bind(this));
+        this.#gameState.clear();
     }
 
     /**
@@ -54,32 +39,10 @@ export default class Game {
      * Randomizes categories each time a new game is started, resets the score, and proceeds to the next question.
      */
     #newGame() {
-        this.#startButton.classList.add('d-none');
-        this.#cancelButton.classList.remove('d-none');
-
-        this.#questionSection.classList.remove('d-none');
-        this.#pointsSection.classList.remove('d-none');
-        this.#scoreSection.classList.add('d-none');
-
+        this.#gameState.start();
         this.#categories = this.#category.get();
         this.#score.reset();
-
         this.#nextQuestion();
-    }
-
-    /**
-     * Clears the game.
-     * Resets the number of questions to zero.
-     */
-    #clearGame() {
-        this.#startButton.classList.remove('d-none');
-        this.#cancelButton.classList.add('d-none');
-
-        this.#questionSection.classList.add('d-none');
-        this.#pointsSection.classList.add('d-none');
-        this.#scoreSection.classList.add('d-none');
-
-        this.#resetNumberQuestion();
     }
 
     /**
@@ -90,57 +53,47 @@ export default class Game {
      */
     async #nextQuestion() {
 
-        const category = this.#categories[this.#numberQuestion];
+        const category = this.#categories[this.#gameState.getNumberQuestion()];
+        const questionToken = this.#questionToken.getSessionToken();
 
-        const question = new Question(category, this.#token.getSessionToken());
+        const question = new Question(category, questionToken);
 
         await new Promise((resolve) => {
-            question.get().then(() => {
 
+            question.get().then(() => {
                 this.#questionOptions = document.querySelectorAll('[data-value]');
 
                 this.#questionOptions.forEach(option => {
+
                     option.addEventListener('click', (event) => {
-
                         const isValidAnswer = question.isCorrectAnswer(event.target.dataset.value);
-
-                        if (isValidAnswer) {
-                            this.#score.increment();
-                        }
-
-                        if (this.#numberQuestion >= 5) {
-                            this.#endGame();
-                            return;
-
-                        } else {
-                            this.#nextQuestion();
-                        }
+                        this.#checkQuestionAnswer(isValidAnswer);
                     });
                 });
-                this.#numberQuestion ++;
+                this.#gameState.incrementNumberQuestion();
                 resolve();
             });
         });
     }
 
     /**
-     * Ends the game.
-     * Resets the number of questions to zero.
+     * Checks if the provided answer is valid, increments the score if valid, and proceeds to the next question or ends the game based on the current state.
+     * 
+     * @param {boolean} isValidAnswer - A boolean indicating if the answer provided is valid.
      */
-    #endGame() {
-        this.#startButton.classList.remove('d-none');
-        this.#cancelButton.classList.add('d-none');
+    #checkQuestionAnswer(isValidAnswer){
 
-        this.#questionSection.classList.add('d-none');
-        this.#scoreSection.classList.remove('d-none');
+        if (isValidAnswer) {
+            this.#score.increment();
+        }
 
-        this.#resetNumberQuestion();
+        if (this.#gameState.isNumberQuestionReachesLimit()) {
+            this.#gameState.end();
+            return;
+
+        } else {
+            this.#nextQuestion();
+        }
     }
 
-    /**
-     * Resets the number of questions to zero.
-     */
-    #resetNumberQuestion(){
-        this.#numberQuestion = 0;
-    }
 }
