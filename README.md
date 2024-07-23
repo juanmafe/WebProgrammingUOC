@@ -10,4 +10,4 @@ Practices for the Web Programming course.
   - <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/CAA2/question3">Question 3</a>
 
 ### Practice:
-- <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/PR">PR (trivia game)</a>
+- <a href="https://github.com/juanmafe/WebProgrammingUOC/tree/main/PR">PR (trivia quiz game)</a>
