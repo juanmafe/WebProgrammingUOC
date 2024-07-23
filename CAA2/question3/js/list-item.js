@@ -17,13 +17,11 @@ export default class ListItem {
      */
     match(searchTerm) {
 
-        // As it is a json object, we can map the properties to an array.
         const values = Object.values(this.#data);
 
         for (const value of values) {
 
             // For regular values (jobTitle and email in this case).
-            // In order to apply the toUpperCase(), first I need to evaluate if it is a string.
             if (typeof value === 'string' && this.#matchTermIgnoreCase(value, searchTerm)) {
                 return true;
             }
@@ -31,7 +29,6 @@ export default class ListItem {
             // For name.
             if (typeof value === 'object' && value.first && value.last) {
 
-                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
                 const fullName = `${value.first} ${value.last}`;
                 if (this.#matchTermIgnoreCase(fullName, searchTerm)) {
                     return true;
@@ -53,7 +50,6 @@ export default class ListItem {
      * @returns a boolean.
      */
     #matchTermIgnoreCase(value, searchTerm) {
-        // First we eliminate any blanks at the beginning and at the end.
         const searchTermTrimmed = searchTerm.trim();
         return value.toUpperCase().includes(searchTermTrimmed.toUpperCase());
     }
