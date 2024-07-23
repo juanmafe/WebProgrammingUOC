@@ -20,21 +20,9 @@ export default class Toggle {
      * Initializes the rest of the class attributes based on the #ref attribute initialized in the constructor.
      */
     #init() {
-        // Unlike question 3 or index.html, here we only need one, so we use querySelector instead of querySelectorAll,
-        // since the foreach is being executed in the index.html.
         this.#refStatus = this.#ref.querySelector('.js-toggle-status');
-        // We use access to the data-*, in this case, data-status.
-        // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
         const status = this.#ref.dataset.status;
-        // The only way I have found to cast a string to a boolean is using === 'true'.
-        // https://sentry.io/answers/how-can-i-convert-a-string-to-a-boolean-in-javascript/
         this.#status = status === 'true';
-        // This part was complicated. I was trying ("click", this.onClick()), but it didn't work.
-        // Until I found, after a lot of research (searching toogle components in react by other users),
-        // that we need the bind function with the "this" as argument,
-        // so that the callback is created and it works finally.
-        // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-        // https://github.com/aaronshaf/react-toggle/blob/master/src/component/index.js
         this.#ref.addEventListener('click', this.#onClick.bind(this));
         this.#render();
     }
