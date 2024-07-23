@@ -60,11 +60,8 @@ export default class FilterList {
         this.#refList.innerHTML = '';
 
         this.#items.forEach(item => {
-            // We call the match function.
-            // This is quite similar to the style property access we used in the previous question.
-            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataElement/value
+
             if (item.match(this.#refSearch.value)) {
-                // https://stackoverflow.com/questions/38555063/how-to-concatenate-attribute-value-in-innerhtml
                 this.#refList.innerHTML += item.render();
             }
         });
