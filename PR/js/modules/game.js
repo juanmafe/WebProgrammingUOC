@@ -20,7 +20,7 @@ export default class Game {
      */
     constructor() {
         this.#gameState = new GameState();
-        this.#score = new Score();
+        this.#score = new Score(this.#gameState);
         this.#category = new Category();
         this.#questionToken = new QuestionToken();
         this.#init();

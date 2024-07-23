@@ -8,11 +8,14 @@ export default class Score {
     #score;
     #ranking;
 
+    #gameState;
+
     /**
      * Constructor.
      */
-    constructor() {
+    constructor(gameState) {
         this.#ranking = new Ranking();
+        this.#gameState = gameState;
         this.#init();
     }
 
@@ -80,5 +83,7 @@ export default class Score {
         }
         // Cleaning name for next tries.
         playerNameInput.value = '';
+
+        this.#gameState.clear();
     }
 }
