@@ -56,7 +56,7 @@ export default class Game {
         const category = this.#categories[this.#gameState.getNumberQuestion()];
         const questionToken = this.#questionToken.getSessionToken();
 
-        const question = new Question(category, questionToken);
+        const question = new Question(category, questionToken, this.#gameState);
 
         await new Promise((resolve) => {
 
@@ -77,7 +77,8 @@ export default class Game {
     }
 
     /**
-     * Checks if the provided answer is valid, increments the score if valid, and proceeds to the next question or ends the game based on the current state.
+     * Checks if the provided answer is valid, increments the score if valid,
+     * and proceeds to the next question or ends the game based on the current state.
      * 
      * @param {boolean} isValidAnswer - A boolean indicating if the answer provided is valid.
      */

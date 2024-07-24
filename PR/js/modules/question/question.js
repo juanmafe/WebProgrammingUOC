@@ -1,6 +1,7 @@
 import Randomizer from '../utils/randomizer.js';
 import Encoder from '../utils/encoder.js';
 
+const API_LIMIT_REQUEST_IN_MILISECONDS = 5000;
 const API_URL = 'https://opentdb.com/api.php';
 const ERROR_FETCHING_QUESTION = 'Error fetching question from opentdb.com:';
 
@@ -8,6 +9,7 @@ export default class Question {
 
     #category;
     #sessionToken;
+    #gameState;
     #correctAnswer;
 
     /**
@@ -15,10 +17,12 @@ export default class Question {
      * 
      * @param {string} category - The category for the quiz questions.
      * @param {string} sessionToken - The session token for API authentication.
+     * @param {object} gameState - The game state to manage the states of some elements.
      */
-    constructor(category, sessionToken) {
+    constructor(category, sessionToken, gameState) {
         this.#category = category;
         this.#sessionToken = sessionToken;
+        this.#gameState = gameState;
     }
 
     /**
@@ -26,9 +30,15 @@ export default class Question {
      */
     async get() {
 
+        this.#gameState.activeProgressBar();
+
         const fetchedQuestion  = await new Promise((resolve) => {
-            this.#fetch().then(resolve);
+            setTimeout(() => {
+                this.#fetch().then(resolve);
+            }, API_LIMIT_REQUEST_IN_MILISECONDS);
         });
+
+        this.#gameState.disableProgressBar();
 
         if (fetchedQuestion) {
             const decodedQuestion = this.#getDecodedQuestion(fetchedQuestion);

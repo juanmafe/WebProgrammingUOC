@@ -58,8 +58,10 @@ export default class Score {
 
     /**
      * Saves the player's name and score to the ranking list.
-     * Retrieves the player's name input from the DOM, validates it, and adds the player's data to the ranking list if the name is not empty.
-     * If the player's name is empty, displays a placeholder message and focuses on the input field for correction.
+     * Retrieves the player's name input from the DOM, validates it,
+     * and adds the player's data to the ranking list if the name is not empty.
+     * If the player's name is empty, displays a placeholder message and focuses
+     * on the input field for correction.
      */
     #save(){
         const playerNameInput = document.querySelector('.js-username');

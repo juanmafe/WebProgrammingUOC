@@ -28,7 +28,8 @@ export default class Ranking {
      * Checks if the 'ranking' cookie exists in the document's cookies. If found,
      * parses the ranking data and assigns it to the internal ranking property.
      * 
-     * @returns {Array | undefined} The ranking data if found in the cookies, or undefined if the 'ranking' cookie is not present.
+     * @returns {Array | undefined} The ranking data if found in the cookies,
+     * or undefined if the 'ranking' cookie is not present.
      */
     get() {
         if (document.cookie.includes('ranking=')) {
@@ -39,7 +40,8 @@ export default class Ranking {
 
     /**
      * Sets the ranking data in the cookies with the specified expiration duration.
-     * Converts the new ranking data to a JSON string and stores it in the 'ranking' cookie with the specified expiration duration.
+     * Converts the new ranking data to a JSON string and stores it in the 'ranking'
+     * cookie with the specified expiration duration.
      * 
      * @param {Array} newRanking - The new ranking data to be stored in the cookies.
      */

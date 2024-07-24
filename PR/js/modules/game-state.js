@@ -10,6 +10,8 @@ export default class GameState {
     #pointsSection;
     #scoreSection;
 
+    #progressBar;
+
     #numberQuestion;
 
     /**
@@ -29,6 +31,7 @@ export default class GameState {
         this.#questionSection = document.querySelector('.js-question');
         this.#pointsSection = document.querySelector('.points');
         this.#scoreSection = document.querySelector('.js-score');
+        this.#progressBar = document.querySelector('.progress-bar');
 
         this.#cancelButton.addEventListener('click', this.clear.bind(this));
         this.#discardButton.addEventListener('click', this.clear.bind(this));
@@ -113,4 +116,21 @@ export default class GameState {
     getStartButton() {
         return this.#startButton;
     }
+
+    /**
+     * Activates the progress bar.
+     */
+    activeProgressBar() {
+        this.#progressBar.style.display = 'block';
+        this.#progressBar.classList.add('active');
+    }
+
+    /**
+     * Disable the progress bar.
+     */
+    disableProgressBar() {
+        this.#progressBar.classList.remove('active');
+        this.#progressBar.style.display = 'none';
+    }
+
 }
